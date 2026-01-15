@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squeezelite ESP32-S3 Web Flasher</title>
+    <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #00d4ff;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        .flash-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        esp-web-install-button {
+            --esp-tools-button-background: #00d4ff;
+            --esp-tools-button-text-color: #000;
+        }
+        .info-box {
+            background: rgba(0,212,255,0.1);
+            border-left: 4px solid #00d4ff;
+            padding: 15px 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning-box {
+            background: rgba(255,193,7,0.1);
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .partition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .partition-table th, .partition-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .partition-table th {
+            color: #00d4ff;
+        }
+        .chip-info {
+            display: inline-block;
+            background: #00d4ff;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        code {
+            background: rgba(0,0,0,0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+        }
+        .steps {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .steps li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎵 Squeezelite ESP32-S3</h1>
+    <p class="subtitle">Web Flasher - Wersja 5.3.1</p>
+    
+    <div class="flash-container">
+        <div class="chip-info">ESP32-S3 (QFN56)</div>
+        
+        <h2>Instalacja Firmware</h2>
+        
+        <div class="info-box">
+            <strong>Wymagania:</strong>
+            <ul class="steps">
+                <li>Przeglądarka Chrome, Edge lub Opera (WebSerial API)</li>
+                <li>Kabel USB podłączony do ESP32-S3</li>
+                <li>Sterowniki USB zainstalowane (CP2102/CH340)</li>
+            </ul>
+        </div>
+        
+        <esp-web-install-button manifest="./manifest.json">
+            <button slot="activate">
+                🚀 Zainstaluj Firmware
+            </button>
+            <span slot="unsupported">
+                ❌ Twoja przeglądarka nie wspiera Web Serial API.<br>
+                Użyj Chrome, Edge lub Opera.
+            </span>
+            <span slot="not-allowed">
+                ⚠️ Musisz otworzyć tę stronę przez HTTPS lub localhost.
+            </span>
+        </esp-web-install-button>
+        
+        <div class="warning-box">
+            <strong>⚠️ Uwaga:</strong> Pierwszy flash wymaże całą pamięć flash w tym konfigurację NVS!
+            Jeśli chcesz zachować konfigurację, użyj aktualizacji OTA przez web interface.
+        </div>
+    </div>
+    
+    <h3>📦 Zawartość pakietu</h3>
+    <table class="partition-table">
+        <thead>
+            <tr>
+                <th>Plik</th>
+                <th>Adres</th>
+                <th>Opis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>bootloader.bin</code></td>
+                <td><code>0x0</code></td>
+                <td>Bootloader ESP-IDF</td>
+            </tr>
+            <tr>
+                <td><code>partition-table.bin</code></td>
+                <td><code>0x8000</code></td>
+                <td>Tablica partycji</td>
+            </tr>
+            <tr>
+                <td><code>ota_data_initial.bin</code></td>
+                <td><code>0x49000</code></td>
+                <td>Dane OTA (boot z OTA_0)</td>
+            </tr>
+            <tr>
+                <td><code>squeezelite.bin</code></td>
+                <td><code>0x1D0000</code></td>
+                <td>Firmware (partycja OTA_0)</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>🔧 Po instalacji</h3>
+    <ol class="steps">
+        <li>ESP32 uruchomi się i utworzy punkt dostępowy WiFi: <code>squeezelite-XXXXXX</code></li>
+        <li>Połącz się z tym WiFi (hasło: <code>squeezelite</code>)</li>
+        <li>Otwórz <code>http://192.168.4.1</code> w przeglądarce</li>
+        <li>Skonfiguruj połączenie z Twoim WiFi</li>
+        <li>Po restarcie urządzenie będzie dostępne w Twojej sieci</li>
+    </ol>
+    
+    <h3>📋 Specyfikacja sprzętu</h3>
+    <ul class="steps">
+        <li><strong>Chip:</strong> ESP32-S3 QFN56 (revision v0.2)</li>
+        <li><strong>Flash:</strong> 16MB (MXIC)</li>
+        <li><strong>PSRAM:</strong> 8MB Octal (AP_3v3)</li>
+        <li><strong>SPDIF:</strong> BCK=38, WS=39, DO=40</li>
+        <li><strong>Status LED:</strong> GPIO 48 (green)</li>
+    </ul>
+    
+    <div style="text-align: center; margin-top: 40px; color: #666;">
+        <p>Bazowane na <a href="https://github.com/sle118/squeezelite-esp32" style="color: #00d4ff;">squeezelite-esp32</a></p>
+        <p>Build: 2026-01-15 | ESP-IDF v5.3.1</p>
+    </div>
+</body>
+</html>

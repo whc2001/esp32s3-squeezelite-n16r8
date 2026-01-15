@@ -1,0 +1,19 @@
+{
+  "name": "Squeezelite ESP32-S3 Audio Player",
+  "version": "5.3.1-2026.01.15",
+  "home_assistant_domain": "media_player",
+  "funding_url": "https://github.com/sle118/squeezelite-esp32",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "improv": false,
+      "parts": [
+        {
+          "path": "squeezelite_full.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}
