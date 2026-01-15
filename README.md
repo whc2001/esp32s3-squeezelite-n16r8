@@ -1,5 +1,5 @@
 # 🎵 Squeezelite ESP32-S3 Audio Player
-Source files i will upload Soon
+
 [![ESP-IDF](https://img.shields.io/badge/ESP--IDF-v5.3.1-blue)](https://docs.espressif.com/projects/esp-idf/)
 [![Platform](https://img.shields.io/badge/Platform-ESP32--S3-green)](https://www.espressif.com/en/products/socs/esp32-s3)
 [![License](https://img.shields.io/badge/License-GPL--3.0-orange)](LICENSE)
@@ -175,4 +175,5 @@ This project is based on [squeezelite-esp32](https://github.com/sle118/squeezeli
 **Last updated:** 2026-01-15  
 **Firmware version:** 5.3.1  
 **ESP-IDF:** v5.3.1
+
 
