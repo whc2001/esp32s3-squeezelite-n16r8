@@ -1,4 +1,6 @@
 node_modules/
+!source/components/wifi-manager/webapp/dist
+!source/components/wifi-manager/webapp/node_modules
 dist/
 build/
 .DS_Store
