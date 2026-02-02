@@ -98,7 +98,7 @@ if(CMAKE_HOST_UNIX AND DEFINED NOPURE)
         COMMAND ${CMAKE_COMMAND} -E echo "**** ${CMAKE_SOURCE_DIR}/components/spotify/cspot/bell/external/nanopb/generator/protoc"
         COMMAND chmod +x ${CMAKE_SOURCE_DIR}/components/spotify/cspot/bell/external/nanopb/generator/protoc-gen-nanopb
         COMMAND chmod +x ${CMAKE_SOURCE_DIR}/components/spotify/cspot/bell/external/nanopb/generator/*.py
-        COMMAND chmod +x ${CMAKE_SOURCE_DIR}/components/spotify/cspot/bell/external/nanopb/generator/*.py2
+        # COMMAND chmod +x ${CMAKE_SOURCE_DIR}/components/spotify/cspot/bell/external/nanopb/generator/*.py2
         COMMAND chmod +x ${CMAKE_SOURCE_DIR}/components/spotify/cspot/bell/external/nanopb/generator/proto/*.py
         COMMAND chmod +x ${CMAKE_SOURCE_DIR}/components/spotify/cspot/bell/external/nanopb/generator/protoc
         COMMAND ${CMAKE_COMMAND} -E echo "************************************************************************************************"    

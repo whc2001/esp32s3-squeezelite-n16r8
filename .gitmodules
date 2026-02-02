@@ -11,3 +11,6 @@
 [submodule "source/components/wifi-manager/webapp/src/bootswatch"]
 	path = source/components/wifi-manager/webapp/src/bootswatch
 	url = https://github.com/thomaspark/bootswatch.git
+[submodule "source/components/spotify/cspot/bell/external/nanopb"]
+	path = source/components/spotify/cspot/bell/external/nanopb
+	url = https://github.com/nanopb/nanopb
