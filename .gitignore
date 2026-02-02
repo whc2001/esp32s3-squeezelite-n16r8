@@ -1,7 +1,10 @@
 node_modules/
-!source/components/wifi-manager/webapp/dist
-!source/components/wifi-manager/webapp/node_modules
 dist/
+!source/components/wifi-manager/webapp/
+!source/components/wifi-manager/webapp/dist/
+!source/components/wifi-manager/webapp/dist/**
+!source/components/wifi-manager/webapp/node_modules/
+!source/components/wifi-manager/webapp/node_modules/**
 build/
 .DS_Store
 *.log
